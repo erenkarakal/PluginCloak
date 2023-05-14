@@ -1,0 +1,31 @@
+show-commands:
+  default:
+    commands:
+      - spawn
+      - msg
+
+  admin:
+    inherits-from: # merge group default with admin
+      - default
+    commands:
+      - kit
+      - setkit
+      - givekit
+      - createkit
+
+anticheat:
+  # What to do when someone gets caught hacking?
+  # This check is 100% accurate.
+  #
+  # none - return an empty list to the cheater and do nothing else
+  # fakelist - return a fake plugin list to the cheater
+  # crash - crash the cheater's game
+  # console - run a console command
+  method: none
+  command: ban {player} cheating
+  fakelist:
+    - fakeplugin1
+    - fakeplugin2
+
+# Sent when a player executes a command they can't see or doesn't exist.
+unknown-message: <red>Unknown command. Type /help for a list of commands.

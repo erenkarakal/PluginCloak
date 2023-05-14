@@ -1,0 +1,11 @@
+name: PluginCloak
+version: '${project.version}'
+main: me.eren.plugincloak.PluginCloak
+api-version: 1.19
+depend: ["ProtocolLib", "Vault"]
+authors: ["eren", "pesekjan"]
+
+commands:
+  plugincloak:
+    permission: plugincloak.command
+    usage: /plugincloak [reload]
