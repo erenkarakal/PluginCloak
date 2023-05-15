@@ -14,7 +14,7 @@ If a player executes a command that doesn't exist or they can't see, it will ret
 ![image](https://user-images.githubusercontent.com/67760502/204563296-87618582-8fb0-4797-ab06-aa1f9ac9eb1b.png)
 
 ## Cheat Detection
-PluginCloak can detect cheaters who are trying to see your plugins. You can return a fake list, crash them, show no plugins or run a console command on them.
+PluginCloak can detect cheaters who are trying to see your plugins. You can return a fake list, show no plugins or run a console command on them.
 This check is 100% accurate.
 
 ![image](https://user-images.githubusercontent.com/67760502/204563763-a5e7efb8-7d6f-4549-b40b-24a978ad4f4b.png)
