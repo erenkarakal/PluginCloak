@@ -1,8 +1,8 @@
-package me.eren.plugincloak;
+package me.eren.plugincloak.bukkit;
 
-import me.eren.plugincloak.listeners.CommandPreProcessListener;
-import me.eren.plugincloak.listeners.PlayerCommandSendListener;
-import me.eren.plugincloak.listeners.TabCompleteListener;
+import me.eren.plugincloak.bukkit.listeners.CommandPreProcessListener;
+import me.eren.plugincloak.bukkit.listeners.PlayerCommandSendListener;
+import me.eren.plugincloak.bukkit.listeners.TabCompleteListener;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -11,8 +11,8 @@ import java.util.*;
 
 public final class PluginCloak extends JavaPlugin {
     private static PluginCloak instance;
-    private static List<String> plugins = new ArrayList<String>();
-    private static Map<String, List<String>> showcommands = new HashMap<String, List<String>>();
+    private static List<String> plugins = new ArrayList<>();
+    private static Map<String, List<String>> showCommands = new HashMap<>();
 
 
     @Override
@@ -20,7 +20,7 @@ public final class PluginCloak extends JavaPlugin {
         instance = this;
         getLogger().info("Enabled PluginCloak v" + this.getDescription().getVersion());
 
-        this.getCommand("plugincloak").setExecutor(new CommandReload());
+        this.getCommand("plugincloak").setExecutor(new ReloadCommand());
 
         TabCompleteListener.registerListener();
         getServer().getPluginManager().registerEvents(new PlayerCommandSendListener(), this);
@@ -44,19 +44,19 @@ public final class PluginCloak extends JavaPlugin {
     }
 
     public static void loadConfig() {
-        PluginCloak.showcommands.clear();
+        showCommands.clear();
         for (String group : instance.getConfig().getConfigurationSection("show-commands").getKeys(false)) {
             List<String> commands = instance.getConfig().getStringList("show-commands." + group + ".commands");
 
             for (String inherits : instance.getConfig().getStringList("show-commands." + group + ".inherits-from")) {
                 commands.addAll(instance.getConfig().getStringList("show-commands." + inherits + ".commands"));
             }
-            PluginCloak.showcommands.put(group, commands);
+            PluginCloak.showCommands.put(group, commands);
         }
     }
 
     public static List<String> getAvailableCommands(String group) {
-        return PluginCloak.showcommands.get(group);
+        return PluginCloak.showCommands.get(group);
     }
 
     public static Collection<String> getPlugins() {

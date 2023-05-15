@@ -1,6 +1,6 @@
-package me.eren.plugincloak.listeners;
+package me.eren.plugincloak.bukkit.listeners;
 
-import me.eren.plugincloak.PluginCloak;
+import me.eren.plugincloak.bukkit.PluginCloak;
 import net.milkbowl.vault.permission.Permission;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;

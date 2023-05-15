@@ -1,4 +1,4 @@
-package me.eren.plugincloak.listeners;
+package me.eren.plugincloak.bukkit.listeners;
 
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.ProtocolLibrary;
@@ -10,8 +10,8 @@ import com.comphenix.protocol.events.PacketEvent;
 import com.mojang.brigadier.context.StringRange;
 import com.mojang.brigadier.suggestion.Suggestion;
 import com.mojang.brigadier.suggestion.Suggestions;
-import me.eren.plugincloak.PluginCloak;
-import me.eren.plugincloak.events.CheatDetectEvent;
+import me.eren.plugincloak.bukkit.PluginCloak;
+import me.eren.plugincloak.bukkit.events.CheatDetectEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -38,16 +38,15 @@ public class TabCompleteListener {
 
                         // Check 2
                         if (!hacking) {
-                            for(Suggestion suggestion : event.getPacket().getSpecificModifier(Suggestions.class).read(0).getList()) {
+                            for (Suggestion suggestion : event.getPacket().getSpecificModifier(Suggestions.class).read(0).getList()) {
                                 if (!PluginCloak.getPlugins().contains(suggestion.getText())) {
-                                    return;
+                                    return; // not hacking
                                 }
                                 hacking = true;
                             }
                         }
                         if (hacking) {
-                            CheatDetectEvent cheatDetectEvent = new CheatDetectEvent(event.getPlayer());
-                            Bukkit.getPluginManager().callEvent(cheatDetectEvent);
+                            Bukkit.getPluginManager().callEvent(new CheatDetectEvent(event.getPlayer()));
 
                             event.setCancelled(true);
 
@@ -57,7 +56,7 @@ public class TabCompleteListener {
                                     event.setCancelled(false);
 
                                     List<Suggestion> suggestionsList = new ArrayList<>();
-                                    for (String fakePluginName: PluginCloak.getInstance().getConfig().getStringList("anticheat.fakelist")) {
+                                    for (String fakePluginName : PluginCloak.getInstance().getConfig().getStringList("anticheat.fakelist")) {
                                         suggestionsList.add(new Suggestion(new StringRange(1, 1), ChatColor.translateAlternateColorCodes('&', fakePluginName) + ":" + fakePluginName));
                                     }
 
