@@ -30,7 +30,7 @@ public final class PluginCloak extends JavaPlugin {
         loadConfig();
 
         for (Plugin plugin : Bukkit.getPluginManager().getPlugins()) {
-            PluginCloak.plugins.add(plugin.getName());
+            plugins.add(plugin.getName());
         }
     }
 
@@ -51,12 +51,12 @@ public final class PluginCloak extends JavaPlugin {
             for (String inherits : instance.getConfig().getStringList("show-commands." + group + ".inherits-from")) {
                 commands.addAll(instance.getConfig().getStringList("show-commands." + inherits + ".commands"));
             }
-            PluginCloak.showCommands.put(group, commands);
+            showCommands.put(group, commands);
         }
     }
 
     public static List<String> getAvailableCommands(String group) {
-        return PluginCloak.showCommands.get(group);
+        return showCommands.get(group);
     }
 
     public static Collection<String> getPlugins() {

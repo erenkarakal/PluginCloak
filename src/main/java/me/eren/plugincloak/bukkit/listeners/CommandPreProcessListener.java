@@ -13,7 +13,7 @@ public class CommandPreProcessListener implements Listener {
     public void onCommand(PlayerCommandPreprocessEvent event) {
         if (event.getPlayer().hasPermission("plugincloak.bypass")) return;
 
-        String command = event.getMessage().replace("/", "");
+        String command = event.getMessage().replace("/", "").split(" ")[0];
         String group = Bukkit.getServer().getServicesManager().getRegistration(Permission.class).getProvider().getPrimaryGroup(event.getPlayer());
         String message = PluginCloak.getInstance().getConfig().getString("unknown-message");
 

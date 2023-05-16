@@ -20,7 +20,6 @@ anticheat:
   #
   # none - return an empty list to the cheater and do nothing else
   # fakelist - return a fake plugin list to the cheater
-  # crash - crash the cheater's game
   # console - run a console command
   method: none
   command: ban {player} cheating
